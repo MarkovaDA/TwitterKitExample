@@ -9,9 +9,24 @@
 import UIKit
 import TwitterKit
 class HomeViewController: UIViewController {
-
+    
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userLoginLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        TwitterApiClient.shared.getCurrentUser(success: { (user: TWTRUser?) in
+            print("SUCCESS GETTING USER")
+            DispatchQueue.main.async {
+                self.userNameLabel.text = user?.name
+                self.userLoginLabel.text = user?.screenName
+            }
+        }) { (error: Error?) in
+            print("ERROR GETTING USER")
+        }
     }
 
     override func didReceiveMemoryWarning() {
