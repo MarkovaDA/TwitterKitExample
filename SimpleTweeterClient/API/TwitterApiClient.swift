@@ -57,12 +57,7 @@ class TwitterApiClient {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(formatter)
                 let tweets = try! decoder.decode([Tweet].self, from: data!)
-                print(tweets)
             }
-            /*do {}
-            catch let jsonError as NSError {
-                print("json error: \(jsonError.localizedDescription)")
-            }*/
         }
     }
     
