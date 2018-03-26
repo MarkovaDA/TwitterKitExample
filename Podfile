@@ -7,7 +7,7 @@ target 'SimpleTweeterClient' do
 
   # Pods for SimpleTweeterClient 
 	pod 'TwitterKit'
-
+	pod 'Microfutures'
   target 'SimpleTweeterClientTests' do
     inherit! :search_paths
     # Pods for testing

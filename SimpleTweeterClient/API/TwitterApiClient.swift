@@ -17,14 +17,14 @@ import Microfutures
 //sendTweet
 //logout
 class TwitterApiClient {
-    //https://github.com/twitter/twitter-kit-ios/wiki/Access-Twitter's-REST-API
     let client = TWTRAPIClient()
     let store = TWTRTwitter.sharedInstance().sessionStore
     
     static let shared = TwitterApiClient()
     
     func getCurrentUserId() -> String? {
-        return TWTRTwitter.sharedInstance().sessionStore.session()?.userID
+        //self.store.saveSession(withAuthToken: String, authTokenSecret: <#T##String#>, completion: <#T##TWTRSessionStoreSaveCompletion##TWTRSessionStoreSaveCompletion##(TWTRAuthSession?, Error?) -> Void#>)
+        return self.store.session()?.userID
     }
     
     func getCurrentUser(success: @escaping (TWTRUser?) -> (), failure: @escaping (Error?) -> ()) {
@@ -38,6 +38,31 @@ class TwitterApiClient {
             } else {
                 failure(nil)
             }
+        }
+    }
+    
+    func getHomeTimeline() {
+        //let userClient = TWTRAPIClient.init(userID: self.getCurrentUserId());
+        let tweetFetchUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json"
+        let params = ["user_id": self.getCurrentUserId()]
+    
+        let request = self.client.urlRequest(withMethod: "GET", urlString: tweetFetchUrl, parameters: params, error: nil)
+    
+        self.client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
+            if connectionError != nil {
+                print("Error: \(String(describing: connectionError))")
+            } else {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "E M dd HH:mm:ss +zzzz yyyy"
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let tweets = try! decoder.decode([Tweet].self, from: data!)
+                print(tweets)
+            }
+            /*do {}
+            catch let jsonError as NSError {
+                print("json error: \(jsonError.localizedDescription)")
+            }*/
         }
     }
     

@@ -20,6 +20,8 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         TwitterApiClient.shared.getCurrentUser(success: { (user: TWTRUser?) in
             print("SUCCESS GETTING USER")
+            print("GET HOMETIMELINE")
+            TwitterApiClient.shared.getHomeTimeline()
             DispatchQueue.main.async {
                 self.userNameLabel.text = user?.name
                 self.userLoginLabel.text = user?.screenName
