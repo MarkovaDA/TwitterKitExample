@@ -8,12 +8,15 @@
 
 import UIKit
 class DetailViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @IBAction func backBtnClicked(_ sender: UIButton) {
+        presentingViewController?.dismiss(animated: true, completion:nil)
     }
 }

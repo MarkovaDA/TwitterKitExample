@@ -48,7 +48,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func logoutBtnClick(_ sender: UIBarButtonItem) {
-        //presentingViewController?.dismiss(animated: true, completion:nil)
         self.logout()
     }
     
@@ -74,6 +73,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.tweetTextField.text = self.tweets![indexPath.row].text
         cell.tweetDateLabel.text = formatter.string(from: self.tweets![indexPath.row].createdAt)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("ROW SELECTED", indexPath.row);
+        self.performSegue(withIdentifier: "TweetDetailSegue", sender: self)
     }
     
     func blockApplicationUI() {
