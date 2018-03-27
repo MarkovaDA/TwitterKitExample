@@ -8,26 +8,36 @@
 
 import UIKit
 import TwitterKit
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userLoginLabel: UILabel!
+    @IBOutlet weak var tweetTableView: UITableView!
+    
     var activityIndicator = UIActivityIndicatorView()
+    var tweets: [Tweet]? = [] //cписок твитов текущего пользователя
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.tweetTableView.estimatedRowHeight = 100
+        self.tweetTableView.rowHeight = UITableViewAutomaticDimension
         self.blockApplicationUI()
         TwitterApiClient.shared.getCurrentUser(success: { (user: TWTRUser?) in
-            TwitterApiClient.shared.getHomeTimeline()
-            DispatchQueue.main.async {
-                self.userNameLabel.text = user?.name
-                self.userLoginLabel.text = user?.screenName
-                //получение списка твитов и обновление формы
-                self.unblockApplicationUI()
-            }
+            TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
+                DispatchQueue.main.async {
+                    self.userNameLabel.text = user?.name
+                    self.userLoginLabel.text = user?.screenName
+                    self.tweets = tweets
+                    self.tweetTableView.reloadData()
+                    //print("КОЛ-ВО ТВИТОВ \(tweets?.count)")
+                    self.unblockApplicationUI()
+                }
+            }, failure: {(error: Error?) in
+                print("ERROR GETTING TWEETS")
+            })
         }) { (error: Error?) in
             print("ERROR GETTING USER")
         }
@@ -50,6 +60,19 @@ class HomeViewController: UIViewController {
             let loginController = storyboard?.instantiateViewController(withIdentifier: "AppLoginViewController") as! LoginViewController
             present(loginController, animated:true, completion: nil)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.tweets!.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetTableViewCell
+        cell.tweetTextField.text = self.tweets![indexPath.row].text
+        //cell.tweetDate.text = "27.03.2018"
+        //cell.tweetText.text = self.tweets![indexPath.row].text
+        //cell.tweetDate.text = "27.03.2018"
+        return cell
     }
     
     func blockApplicationUI() {

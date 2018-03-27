@@ -41,7 +41,7 @@ class TwitterApiClient {
         }
     }
     
-    func getHomeTimeline() {
+    func getHomeTimeline(success: @escaping ([Tweet]?) -> (), failure: @escaping (Error?) -> ()) {
         //let userClient = TWTRAPIClient.init(userID: self.getCurrentUserId());
         let tweetFetchUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json"
         let params = ["user_id": self.getCurrentUserId()]
@@ -51,12 +51,14 @@ class TwitterApiClient {
         self.client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
             if connectionError != nil {
                 print("Error: \(String(describing: connectionError))")
+                failure(nil)
             } else {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "E M dd HH:mm:ss +zzzz yyyy"
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(formatter)
                 let tweets = try! decoder.decode([Tweet].self, from: data!)
+                success(tweets)
             }
         }
     }

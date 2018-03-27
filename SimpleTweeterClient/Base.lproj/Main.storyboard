@@ -123,13 +123,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrI-CQ-9sy">
-                                <rect key="frame" x="167.66666666666666" y="659" width="79" height="30"/>
-                                <state key="normal" title="Make tweet"/>
-                                <connections>
-                                    <segue destination="AYu-vL-SvS" kind="show" id="iuR-xR-AfC"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HuK-Q1-wKf">
                                 <rect key="frame" x="226" y="94" width="168" height="28"/>
                                 <constraints>
@@ -156,17 +149,64 @@
                                     <constraint firstAttribute="width" constant="150" id="YMJ-52-4gT"/>
                                 </constraints>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mbK-PE-xrR">
+                                <rect key="frame" x="20" y="249" width="374" height="418"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TweetCell" rowHeight="114" id="dUM-c5-DdW" customClass="TweetTableViewCell" customModule="SimpleTweeterClient" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="374" height="114"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dUM-c5-DdW" id="tV9-o6-mVu">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="114"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7qL-Cx-wJp">
+                                                    <rect key="frame" x="4" y="11" width="366" height="98"/>
+                                                    <color key="backgroundColor" red="0.63856757500000005" green="0.7969795864" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7qL-Cx-wJp" firstAttribute="leading" secondItem="tV9-o6-mVu" secondAttribute="leading" constant="4" id="5cf-f4-X6G"/>
+                                                <constraint firstItem="7qL-Cx-wJp" firstAttribute="top" secondItem="tV9-o6-mVu" secondAttribute="top" constant="11" id="PRZ-8R-u3I"/>
+                                                <constraint firstAttribute="trailing" secondItem="7qL-Cx-wJp" secondAttribute="trailing" constant="4" id="mPK-O4-eRp"/>
+                                                <constraint firstAttribute="bottom" secondItem="7qL-Cx-wJp" secondAttribute="bottom" constant="5" id="nkI-ul-n5Z"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="tweetTextField" destination="7qL-Cx-wJp" id="qKM-nM-mQj"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Agf-4r-k1X" id="PHO-qp-jDK"/>
+                                    <outlet property="delegate" destination="Agf-4r-k1X" id="XCL-vN-Zja"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrI-CQ-9sy">
+                                <rect key="frame" x="168.33333333333334" y="677" width="79" height="30"/>
+                                <state key="normal" title="Make tweet"/>
+                                <connections>
+                                    <segue destination="AYu-vL-SvS" kind="show" id="iuR-xR-AfC"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.94045498709999997" green="0.94045498709999997" blue="0.94045498709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vW1-gu-SFl" firstAttribute="leading" secondItem="HuK-Q1-wKf" secondAttribute="leading" id="44s-6E-eOq"/>
-                            <constraint firstItem="e43-Pt-Ccn" firstAttribute="bottom" secondItem="HrI-CQ-9sy" secondAttribute="bottom" constant="47" id="8zq-a7-0Qb"/>
-                            <constraint firstItem="HrI-CQ-9sy" firstAttribute="centerX" secondItem="qJ4-yM-GQM" secondAttribute="centerX" id="99S-Cf-jaE"/>
+                            <constraint firstItem="e43-Pt-Ccn" firstAttribute="trailing" secondItem="mbK-PE-xrR" secondAttribute="trailing" constant="20" id="B9c-Mj-TyS"/>
                             <constraint firstItem="n2B-Uh-z67" firstAttribute="leading" secondItem="e43-Pt-Ccn" secondAttribute="leading" constant="20" id="BCs-Xl-NU7"/>
                             <constraint firstItem="HuK-Q1-wKf" firstAttribute="leading" secondItem="e43-Pt-Ccn" secondAttribute="leading" constant="226" id="BxQ-Cu-g3r"/>
                             <constraint firstItem="vW1-gu-SFl" firstAttribute="top" secondItem="HuK-Q1-wKf" secondAttribute="bottom" constant="8" symbolic="YES" id="EWE-hi-qVI"/>
+                            <constraint firstItem="e43-Pt-Ccn" firstAttribute="bottom" secondItem="HrI-CQ-9sy" secondAttribute="bottom" constant="29" id="Mc4-WY-gcc"/>
+                            <constraint firstItem="HrI-CQ-9sy" firstAttribute="top" secondItem="mbK-PE-xrR" secondAttribute="bottom" constant="10" id="PnD-dB-OVZ"/>
+                            <constraint firstItem="mbK-PE-xrR" firstAttribute="leading" secondItem="n2B-Uh-z67" secondAttribute="leading" id="XcN-lV-Q9Z"/>
                             <constraint firstItem="n2B-Uh-z67" firstAttribute="top" secondItem="e43-Pt-Ccn" secondAttribute="top" constant="20" id="Xjr-Zy-Uk7"/>
                             <constraint firstItem="HuK-Q1-wKf" firstAttribute="trailing" secondItem="qJ4-yM-GQM" secondAttribute="trailingMargin" id="azG-uA-HHb"/>
+                            <constraint firstItem="HrI-CQ-9sy" firstAttribute="centerX" secondItem="mbK-PE-xrR" secondAttribute="centerX" id="hdF-CG-Hey"/>
+                            <constraint firstItem="mbK-PE-xrR" firstAttribute="top" secondItem="n2B-Uh-z67" secondAttribute="bottom" constant="15" id="now-D1-ipT"/>
                             <constraint firstItem="HuK-Q1-wKf" firstAttribute="top" secondItem="e43-Pt-Ccn" secondAttribute="top" constant="30" id="tW6-ba-6eY"/>
                             <constraint firstItem="vW1-gu-SFl" firstAttribute="trailing" secondItem="HuK-Q1-wKf" secondAttribute="trailing" id="ts0-uv-vne"/>
                         </constraints>
@@ -180,6 +220,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tweetTableView" destination="mbK-PE-xrR" id="Gv9-vd-JEM"/>
                         <outlet property="userLoginLabel" destination="vW1-gu-SFl" id="MOf-dV-aRg"/>
                         <outlet property="userNameLabel" destination="HuK-Q1-wKf" id="ruW-Vf-CrN"/>
                     </connections>
