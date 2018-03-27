@@ -29,7 +29,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
                 DispatchQueue.main.async {
                     self.userNameLabel.text = user?.name
-                    self.userLoginLabel.text = user?.screenName
+                    //self.userLoginLabel.text = user?.screenName
                     self.tweets = tweets
                     self.tweetTableView.reloadData()
                     //print("КОЛ-ВО ТВИТОВ \(tweets?.count)")
@@ -67,11 +67,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy HH:mm:ss"
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetTableViewCell
         cell.tweetTextField.text = self.tweets![indexPath.row].text
-        //cell.tweetDate.text = "27.03.2018"
-        //cell.tweetText.text = self.tweets![indexPath.row].text
-        //cell.tweetDate.text = "27.03.2018"
+        cell.tweetDateLabel.text = formatter.string(from: self.tweets![indexPath.row].createdAt)
         return cell
     }
     

@@ -11,6 +11,7 @@ import UIKit
 class TweetTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tweetTextField: UITextView!
+    @IBOutlet weak var tweetDateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
