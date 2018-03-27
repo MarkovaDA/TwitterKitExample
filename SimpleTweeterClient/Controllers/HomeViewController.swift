@@ -12,19 +12,21 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userLoginLabel: UILabel!
+    var activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.blockApplicationUI()
         TwitterApiClient.shared.getCurrentUser(success: { (user: TWTRUser?) in
-            print("SUCCESS GETTING USER")
-            print("GET HOMETIMELINE")
             TwitterApiClient.shared.getHomeTimeline()
             DispatchQueue.main.async {
                 self.userNameLabel.text = user?.name
                 self.userLoginLabel.text = user?.screenName
+                //получение списка твитов и обновление формы
+                self.unblockApplicationUI()
             }
         }) { (error: Error?) in
             print("ERROR GETTING USER")
@@ -48,5 +50,19 @@ class HomeViewController: UIViewController {
             let loginController = storyboard?.instantiateViewController(withIdentifier: "AppLoginViewController") as! LoginViewController
             present(loginController, animated:true, completion: nil)
         }
+    }
+    
+    func blockApplicationUI() {
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        view.addSubview(activityIndicator)
+    }
+    
+    func unblockApplicationUI() {
+        activityIndicator.stopAnimating();
+        UIApplication.shared.endIgnoringInteractionEvents();
     }
 }

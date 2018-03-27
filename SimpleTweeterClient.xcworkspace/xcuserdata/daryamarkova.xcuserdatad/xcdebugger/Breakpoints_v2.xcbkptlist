@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SimpleTweeterClient/Controllers/HomeViewController.swift"
-            timestampString = "543769325.102124"
+            timestampString = "543836778.595095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
             <Locations>
