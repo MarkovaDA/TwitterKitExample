@@ -53,6 +53,12 @@ class TwitterApiClient {
                 print("Error: \(String(describing: connectionError))")
                 failure(nil)
             } else {
+                /*do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                    print("JSON: \(json)")
+                } catch let jsonError as NSError {
+                    print("JSON ERROR: \(jsonError.localizedDescription)")
+                }*/
                 let formatter = DateFormatter()
                 formatter.dateFormat = "E M dd HH:mm:ss +zzzz yyyy"
                 let decoder = JSONDecoder()

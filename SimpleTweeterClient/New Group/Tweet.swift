@@ -25,7 +25,7 @@ struct Tweet: Codable {
     enum CodingKeys:String, CodingKey {
         case id
         case text
-        case entities
+        case entities = "extended_entities"
         case createdAt = "created_at"
     }
 }

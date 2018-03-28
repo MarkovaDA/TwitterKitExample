@@ -76,8 +76,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("ROW SELECTED", indexPath.row);
         self.performSegue(withIdentifier: "TweetDetailSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailView = segue.destination as! DetailViewController
+        let index = self.tweetTableView.indexPathForSelectedRow?.row //номер выбранного твита
+        detailView.selectedTweet = self.tweets?[index!]
     }
     
     func blockApplicationUI() {
