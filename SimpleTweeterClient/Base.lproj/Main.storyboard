@@ -98,22 +98,26 @@
                                 <rect key="frame" x="10" y="54" width="355" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="219" id="5sF-y2-ZT6" customClass="ImageTableViewCell" customModule="SimpleTweeterClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="355" height="219"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="254" id="5sF-y2-ZT6" customClass="ImageTableViewCell" customModule="SimpleTweeterClient" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="355" height="254"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5sF-y2-ZT6" id="dtl-gJ-RoW">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="219"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="254"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h9c-VO-g9h">
-                                                    <rect key="frame" x="4" y="-4" width="347" height="226"/>
+                                                    <rect key="frame" x="15" y="19" width="315" height="209"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="209" id="5cj-yP-tf9"/>
+                                                        <constraint firstAttribute="width" constant="315" id="qjo-JK-oAg"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="h9c-VO-g9h" firstAttribute="centerY" secondItem="dtl-gJ-RoW" secondAttribute="centerY" id="987-3f-wL6"/>
-                                                <constraint firstItem="h9c-VO-g9h" firstAttribute="top" secondItem="dtl-gJ-RoW" secondAttribute="topMargin" constant="-15" id="f9y-py-ySW"/>
-                                                <constraint firstItem="h9c-VO-g9h" firstAttribute="centerX" secondItem="dtl-gJ-RoW" secondAttribute="centerX" id="o8t-a9-nTm"/>
-                                                <constraint firstItem="h9c-VO-g9h" firstAttribute="leading" secondItem="dtl-gJ-RoW" secondAttribute="leadingMargin" constant="-11" id="xIR-z5-DRq"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="h9c-VO-g9h" secondAttribute="bottom" constant="15" id="Apd-fI-r4l"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="h9c-VO-g9h" secondAttribute="trailing" constant="10" id="NaJ-Ph-enD"/>
+                                                <constraint firstItem="h9c-VO-g9h" firstAttribute="leading" secondItem="dtl-gJ-RoW" secondAttribute="leadingMargin" id="X6H-wT-XPb"/>
+                                                <constraint firstItem="h9c-VO-g9h" firstAttribute="top" secondItem="dtl-gJ-RoW" secondAttribute="topMargin" constant="8" id="hoK-gV-0IR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

@@ -42,7 +42,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageTableViewCell
         let imageUrl: String = (self.selectedTweet?.entities?.media![indexPath.row].media_url_https)!
-        //https://pbs.twimg.com/media/DZYSyMrVMAIafgk.jpg
+
         self.uploadImage(url: imageUrl, success: { (image: UIImage) in
             DispatchQueue.main.async {
                 cell.tweetImageView.image = image
