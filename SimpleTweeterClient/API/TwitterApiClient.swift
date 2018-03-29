@@ -23,7 +23,6 @@ class TwitterApiClient {
     static let shared = TwitterApiClient()
     
     func getCurrentUserId() -> String? {
-        //self.store.saveSession(withAuthToken: String, authTokenSecret: <#T##String#>, completion: <#T##TWTRSessionStoreSaveCompletion##TWTRSessionStoreSaveCompletion##(TWTRAuthSession?, Error?) -> Void#>)
         return self.store.session()?.userID
     }
     
@@ -44,8 +43,7 @@ class TwitterApiClient {
     func getHomeTimeline(success: @escaping ([Tweet]?) -> (), failure: @escaping (Error?) -> ()) {
         //let userClient = TWTRAPIClient.init(userID: self.getCurrentUserId());
         let tweetFetchUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json"
-        let params = ["user_id": self.getCurrentUserId()]
-    
+        let params = ["user_id": self.getCurrentUserId(), "tweet_mode": "extended"]
         let request = self.client.urlRequest(withMethod: "GET", urlString: tweetFetchUrl, parameters: params, error: nil)
     
         self.client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
@@ -53,18 +51,31 @@ class TwitterApiClient {
                 print("Error: \(String(describing: connectionError))")
                 failure(nil)
             } else {
-                /*do {
+                do {
                     let json = try JSONSerialization.jsonObject(with: data!, options: [])
                     print("JSON: \(json)")
                 } catch let jsonError as NSError {
                     print("JSON ERROR: \(jsonError.localizedDescription)")
-                }*/
+                }
                 let formatter = DateFormatter()
                 formatter.dateFormat = "E M dd HH:mm:ss +zzzz yyyy"
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(formatter)
                 let tweets = try! decoder.decode([Tweet].self, from: data!)
                 success(tweets)
+            }
+        }
+    }
+    
+    func getTweetById(id: String) {
+        //запрос, который бы позволил зафетчить все урлы у твита
+        self.client.loadTweet(withID: id) { (tweet, error) in
+            if error != nil {
+                print("ERROR GETTING TWEET")
+                print(error)
+            } else {
+                print("GETTING TWEET")
+                print(tweet)
             }
         }
     }

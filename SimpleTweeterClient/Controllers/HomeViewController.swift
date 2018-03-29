@@ -22,8 +22,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("view did appear")
-        self.tweetTableView.estimatedRowHeight = 100
+        self.tweetTableView.estimatedRowHeight = 150
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
         self.blockApplicationUI()
         TwitterApiClient.shared.getCurrentUser(success: { (user: TWTRUser?) in
@@ -63,7 +62,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         formatter.dateFormat = "MM/dd/yyyy HH:mm:ss"
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetTableViewCell
-        cell.tweetTextField.text = self.tweets![indexPath.row].text
+        cell.tweetTextField.text = self.tweets![indexPath.row].fullText
         cell.tweetDateLabel.text = formatter.string(from: self.tweets![indexPath.row].createdAt)
         return cell
     }
@@ -84,6 +83,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func showComposer() {
         //опубликовать твит
+        //сделать свою форму, которая позволит выбирать изображение (загружать) и отправлять твит
+        //TwitterApiClient.shared.client.sendTweet(withText: <#T##String#>, image: <#T##UIImage#>, completion: <#T##TWTRSendTweetCompletion##TWTRSendTweetCompletion##(TWTRTweet?, Error?) -> Void#>)
         let composer = TWTRComposer();
         composer.setText("");
         composer.show(from: self) {

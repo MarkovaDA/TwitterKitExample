@@ -18,10 +18,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        //print(TwitterApiClient.shared.getTweetById(id:  (selectedTweet?.idStr)!))
         /*if let urls:[Tweet.Entity.Media] = self.selectedTweet?.entities?.media {
             for i in 0..<urls.count {
                 print("\(i): \(urls[i])")
-                uploadImage(index: i, url: urls[i].media_url_https!)
             }
         }*/
     }
@@ -36,12 +36,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return 2 //будем загружать одно изображение в тесовых целях
-        return self.selectedTweet?.entities?.media?.count ?? 0
+        return self.selectedTweet?.extendedEntities?.media?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageTableViewCell
-        let imageUrl: String = (self.selectedTweet?.entities?.media![indexPath.row].media_url_https)!
+        let imageUrl: String = (self.selectedTweet?.extendedEntities?.media![indexPath.row].media_url_https)!
 
         self.uploadImage(url: imageUrl, success: { (image: UIImage) in
             DispatchQueue.main.async {

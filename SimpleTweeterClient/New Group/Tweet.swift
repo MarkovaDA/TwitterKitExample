@@ -10,10 +10,11 @@ import Foundation
 
 struct Tweet: Codable {
     let id: Int64 //id твита
+    let idStr: String
     let createdAt: Date //дата публикации
-    let text: String? //текст
-    let entities: Entity?
-    
+    let fullText: String? //текст
+    let extendedEntities: Entity?
+
     struct Entity: Codable {
         struct Media: Codable {
             let media_url: String?
@@ -24,9 +25,10 @@ struct Tweet: Codable {
     
     enum CodingKeys:String, CodingKey {
         case id
-        case text
-        case entities = "extended_entities"
+        case fullText = "full_text"
+        case extendedEntities = "extended_entities"
         case createdAt = "created_at"
+        case idStr = "id_str"
     }
 }
 
