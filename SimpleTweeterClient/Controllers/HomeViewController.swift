@@ -22,22 +22,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("view did appear")
         self.tweetTableView.estimatedRowHeight = 100
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
         self.blockApplicationUI()
         TwitterApiClient.shared.getCurrentUser(success: { (user: TWTRUser?) in
-            TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
-                DispatchQueue.main.async {
-                    self.userNameLabel.text = user?.name
-                    //self.userLoginLabel.text = user?.screenName
-                    self.tweets = tweets
-                    self.tweetTableView.reloadData()
-                    //print("КОЛ-ВО ТВИТОВ \(tweets?.count)")
-                    self.unblockApplicationUI()
-                }
-            }, failure: {(error: Error?) in
-                print("ERROR GETTING TWEETS")
-            })
+            DispatchQueue.main.async {
+                self.userNameLabel.text = user?.name
+            }
+            self.reloadTweetTable()
         }) { (error: Error?) in
             print("ERROR GETTING USER")
         }
@@ -83,6 +76,37 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let detailView = segue.destination as! DetailViewController
         let index = self.tweetTableView.indexPathForSelectedRow?.row //номер выбранного твита
         detailView.selectedTweet = self.tweets?[index!]
+    }
+    
+    @IBAction func onShareTweetBtnClick(_ sender: UIButton) {
+        self.showComposer()
+    }
+    
+    func showComposer() {
+        //опубликовать твит
+        let composer = TWTRComposer();
+        composer.setText("");
+        composer.show(from: self) {
+            result in
+            if (result == .done) {
+                print("UPDATE TWEETS TABLE")
+                //добавился новый твит - обновляем твиты в таблице
+                self.blockApplicationUI()
+                self.reloadTweetTable()
+            }
+        }
+    }
+    
+    func reloadTweetTable() {
+        TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
+            DispatchQueue.main.async {
+                self.tweets = tweets
+                self.tweetTableView.reloadData()
+                self.unblockApplicationUI()
+            }
+        }, failure: {(error: Error?) in
+            print("ERROR GETTING TWEETS")
+        })
     }
     
     func blockApplicationUI() {
