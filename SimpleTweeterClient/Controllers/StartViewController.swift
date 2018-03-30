@@ -8,7 +8,7 @@
 
 import UIKit
 import TwitterKit
-class StartViewController: UINavigationController {
+class StartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,14 +21,17 @@ class StartViewController: UINavigationController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated);
-        //если пользователь уже авторизован - переходим на главную страницу
-        if TWTRTwitter.sharedInstance().sessionStore.hasLoggedInUsers() {
-            let mainNavigationController = storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
-            present(mainNavigationController, animated:false, completion: nil)
-        } else {
-            //редиректим его на страницу авторизации
-            self.performSegue(withIdentifier: "loginSegue", sender: self)
+        super.viewDidAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // your code here
+            //если пользователь уже авторизован - переходим на главную страницу
+            if TWTRTwitter.sharedInstance().sessionStore.hasLoggedInUsers() {
+                let mainNavigationController = self.storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
+                self.present(mainNavigationController, animated:false, completion: nil)
+            } else {
+                //редиректим его на страницу авторизации
+                self.performSegue(withIdentifier: "loginSegue", sender: self)
+            }
         }
     }
 }

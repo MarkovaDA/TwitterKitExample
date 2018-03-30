@@ -23,9 +23,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.userImageView.layer.cornerRadius = 50
-        /*self.userImageView.layer.borderColor = UIColor(red: 100, green: 120, blue: 130, alpha: 1)
-        self.userImageView.layer.borderWidth = 3*/
         self.tweetTableView.estimatedRowHeight = 150
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
         self.blockApplicationUI()
