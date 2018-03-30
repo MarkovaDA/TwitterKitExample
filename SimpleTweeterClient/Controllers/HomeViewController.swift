@@ -13,6 +13,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userLoginLabel: UILabel!
     @IBOutlet weak var tweetTableView: UITableView!
+    @IBOutlet weak var userImageView: UIImageView!
     
     var activityIndicator = UIActivityIndicatorView()
     var tweets: [Tweet]? = [] //cписок твитов текущего пользователя
@@ -22,6 +23,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.userImageView.layer.cornerRadius = 50
+        /*self.userImageView.layer.borderColor = UIColor(red: 100, green: 120, blue: 130, alpha: 1)
+        self.userImageView.layer.borderWidth = 3*/
         self.tweetTableView.estimatedRowHeight = 150
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
         self.blockApplicationUI()
@@ -72,9 +76,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailView = segue.destination as! DetailViewController
-        let index = self.tweetTableView.indexPathForSelectedRow?.row //номер выбранного твита
-        detailView.selectedTweet = self.tweets?[index!]
+        let detailView = segue.destination as? DetailViewController
+        if (detailView != nil) {
+            let index = self.tweetTableView.indexPathForSelectedRow?.row //номер выбранного твита
+            detailView?.selectedTweet = self.tweets?[index!]
+        }
     }
     
     @IBAction func onShareTweetBtnClick(_ sender: UIButton) {
