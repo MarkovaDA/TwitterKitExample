@@ -376,34 +376,44 @@
                                     <outlet property="delegate" destination="Agf-4r-k1X" id="XCL-vN-Zja"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4S-Ez-SFH">
-                                <rect key="frame" x="330" y="674" width="64" height="62"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" image="feather_icon">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onShareTweetBtnClick:" destination="Agf-4r-k1X" eventType="touchUpInside" id="vMN-9d-mMR"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HuK-Q1-wKf">
                                 <rect key="frame" x="20" y="74" width="374" height="22"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GAE-ie-AJ9">
+                                <rect key="frame" x="0.0" y="674" width="414" height="62"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4S-Ez-SFH">
+                                        <rect key="frame" x="350" y="-2" width="64" height="64"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" image="feather_icon">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onShareTweetBtnClick:" destination="Agf-4r-k1X" eventType="touchUpInside" id="vMN-9d-mMR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="p4S-Ez-SFH" secondAttribute="bottom" id="amA-Ca-xDC"/>
+                                    <constraint firstAttribute="trailing" secondItem="p4S-Ez-SFH" secondAttribute="trailing" id="fk5-3o-y5S"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="HuK-Q1-wKf" firstAttribute="leading" secondItem="e43-Pt-Ccn" secondAttribute="leading" constant="20" id="5rh-S1-pWF"/>
-                            <constraint firstItem="e43-Pt-Ccn" firstAttribute="trailing" secondItem="p4S-Ez-SFH" secondAttribute="trailing" constant="20" id="9Qa-nI-bCm"/>
-                            <constraint firstItem="p4S-Ez-SFH" firstAttribute="bottom" secondItem="e43-Pt-Ccn" secondAttribute="bottom" id="EOz-Ut-vu6"/>
+                            <constraint firstItem="GAE-ie-AJ9" firstAttribute="bottom" secondItem="e43-Pt-Ccn" secondAttribute="bottom" id="7Kj-9F-11p"/>
                             <constraint firstItem="mbK-PE-xrR" firstAttribute="top" secondItem="qJ4-yM-GQM" secondAttribute="top" constant="112" id="G8l-mO-DKP"/>
-                            <constraint firstItem="p4S-Ez-SFH" firstAttribute="top" secondItem="mbK-PE-xrR" secondAttribute="bottom" constant="1" id="cxv-pY-NXD"/>
+                            <constraint firstItem="GAE-ie-AJ9" firstAttribute="top" secondItem="mbK-PE-xrR" secondAttribute="bottom" constant="1" id="XZy-Ox-Hnv"/>
+                            <constraint firstItem="GAE-ie-AJ9" firstAttribute="leading" secondItem="e43-Pt-Ccn" secondAttribute="leading" id="fGn-aN-b4P"/>
                             <constraint firstItem="mbK-PE-xrR" firstAttribute="leading" secondItem="HuK-Q1-wKf" secondAttribute="leading" id="j9t-NO-tiU"/>
                             <constraint firstItem="HuK-Q1-wKf" firstAttribute="top" secondItem="e43-Pt-Ccn" secondAttribute="top" constant="10" id="noE-eY-PQM"/>
                             <constraint firstItem="mbK-PE-xrR" firstAttribute="trailing" secondItem="HuK-Q1-wKf" secondAttribute="trailing" id="rHR-V4-yNP"/>
+                            <constraint firstItem="GAE-ie-AJ9" firstAttribute="trailing" secondItem="e43-Pt-Ccn" secondAttribute="trailing" id="vrB-pW-9hy"/>
                             <constraint firstItem="e43-Pt-Ccn" firstAttribute="trailing" secondItem="HuK-Q1-wKf" secondAttribute="trailing" constant="20" id="xAW-AB-gdo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="e43-Pt-Ccn"/>
@@ -424,7 +434,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AI0-0R-JF5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-958" y="2288"/>
+            <point key="canvasLocation" x="-959.4202898550725" y="2287.5"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="evH-ba-TuT">
