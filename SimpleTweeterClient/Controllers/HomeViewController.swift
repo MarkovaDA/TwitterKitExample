@@ -11,11 +11,10 @@ import TwitterKit
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var userLoginLabel: UILabel!
     @IBOutlet weak var tweetTableView: UITableView!
-    @IBOutlet weak var userImageView: UIImageView!
     
     var activityIndicator = UIActivityIndicatorView()
+    //! использовать разделяемый ресурс твитов - при создании твита добавлять новый твит в список, не перегружая форму
     var tweets: [Tweet]? = [] //cписок твитов текущего пользователя
     
     override func viewDidLoad() {
@@ -25,7 +24,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidAppear(_ animated: Bool) {
         self.tweetTableView.estimatedRowHeight = 150
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
-        self.blockApplicationUI()
         TwitterApiClient.shared.getCurrentUser(success: { (user: TWTRUser?) in
             DispatchQueue.main.async {
                 self.userNameLabel.text = user?.name
@@ -35,7 +33,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             print("ERROR GETTING USER")
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -81,37 +79,21 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func onShareTweetBtnClick(_ sender: UIButton) {
-        self.showComposer()
+        let createTweet = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateTweetController")
+            as! CreateTweetViewController
+        self.addChildViewController(createTweet)
+        createTweet.view.frame = self.view.frame
+        self.view.addSubview(createTweet.view)
+        createTweet.didMove(toParentViewController: self)
+        /*let createTweetController = self.storyboard?.instantiateViewController(withIdentifier: "CreateTweetController")
+            as! CreateTweetViewController
+        self.present(createTweetController, animated: true, completion: nil)*/
+        //детектировать изменения
     }
     
-    func showComposer() {
-        //опубликовать твит
-        //сделать свою форму, которая позволит выбирать изображение (загружать) и отправлять твит
-        //TwitterApiClient.shared.client.sendTweet(withText: <#T##String#>, image: <#T##UIImage#>, completion: <#T##TWTRSendTweetCompletion##TWTRSendTweetCompletion##(TWTRTweet?, Error?) -> Void#>)
-        let composer = TWTRComposer();
-        composer.setText("");
-        composer.show(from: self) {
-            result in
-            if (result == .done) {
-                print("UPDATE TWEETS TABLE")
-                //добавился новый твит - обновляем твиты в таблице
-                self.blockApplicationUI()
-                self.reloadTweetTable()
-            }
-        }
-    }
-    
-    @IBAction func onBtnNewTweetClicked(_ sender: UIButton) {
-        //отображаем форму создания нового твита
-        let popup = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "newTweetPopup")
-        as! NewTweetPopupViewController
-        self.addChildViewController(popup)
-        popup.view.frame = self.view.frame
-        self.view.addSubview(popup.view)
-        popup.didMove(toParentViewController: self)
-    }
     
     func reloadTweetTable() {
+        self.blockApplicationUI()
         TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
             DispatchQueue.main.async {
                 self.tweets = tweets
@@ -119,7 +101,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.unblockApplicationUI()
             }
         }, failure: {(error: Error?) in
-            print("ERROR GETTING TWEETS")
+            print(error)
         })
     }
     

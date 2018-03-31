@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewTweetPopupViewController: UIViewController {
+class InfoPopupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

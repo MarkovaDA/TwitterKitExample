@@ -67,17 +67,18 @@ class TwitterApiClient {
         }
     }
     
-    func getTweetById(id: String) {
-        //запрос, который бы позволил зафетчить все урлы у твита
-        self.client.loadTweet(withID: id) { (tweet, error) in
-            if error != nil {
-                print("ERROR GETTING TWEET")
-                print(error)
-            } else {
-                print("GETTING TWEET")
-                print(tweet)
+    func uploadTweet(text: String, success: @escaping (TWTRTweet?) -> (), failure: @escaping (Error?) -> ()) {
+        if let userId = self.getCurrentUserId() {
+            let userClient = TWTRAPIClient(userID: userId)
+            userClient.sendTweet(withText: text) { (tweet, error) in
+                if error != nil {
+                    failure(error)
+                } else {
+                    success(tweet)
+                }
             }
         }
+        
     }
     
     func getProfilePicture() {

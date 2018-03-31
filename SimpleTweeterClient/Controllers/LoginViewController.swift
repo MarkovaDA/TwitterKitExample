@@ -29,8 +29,6 @@ class LoginViewController: UIViewController {
     func login() {
         TWTRTwitter.sharedInstance().logIn {(session, error) in
             if session != nil {
-                /*let mainNavigationController = self.storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
-                self.present(mainNavigationController, animated: true, completion: nil)*/
                 self.performSegue(withIdentifier: "homeSegue", sender: self)
                 print("SUCCESS LOGIN \(String(describing: session?.userName))")
             } else {
