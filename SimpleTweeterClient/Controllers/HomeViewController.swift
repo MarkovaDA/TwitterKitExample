@@ -101,6 +101,16 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    @IBAction func onBtnNewTweetClicked(_ sender: UIButton) {
+        //отображаем форму создания нового твита
+        let popup = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "newTweetPopup")
+        as! NewTweetPopupViewController
+        self.addChildViewController(popup)
+        popup.view.frame = self.view.frame
+        self.view.addSubview(popup.view)
+        popup.didMove(toParentViewController: self)
+    }
+    
     func reloadTweetTable() {
         TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
             DispatchQueue.main.async {
