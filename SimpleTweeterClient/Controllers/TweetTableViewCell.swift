@@ -13,6 +13,7 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetTextField: UITextView!
     @IBOutlet weak var tweetDateLabel: UILabel!
     @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var tweetFavouriteCount: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

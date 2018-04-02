@@ -64,6 +64,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let tweetForCell = TweetList.shared.tweets![indexPath.row]
         cell.tweetTextField.text = tweetForCell.fullText
         cell.tweetDateLabel.text = formatter.string(from: tweetForCell.createdAt)
+        cell.tweetFavouriteCount.text = String(tweetForCell.favouriteCount)
         cell.moreButton.tag = indexPath.row
         return cell
     }

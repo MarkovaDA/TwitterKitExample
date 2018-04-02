@@ -14,7 +14,7 @@ struct Tweet: Codable {
     let createdAt: Date //дата публикации
     let fullText: String? //текст
     let extendedEntities: Entity?
-
+    let favouriteCount: Int
     struct Entity: Codable {
         struct Media: Codable {
             let media_url: String?
@@ -28,6 +28,7 @@ struct Tweet: Codable {
         case fullText = "full_text"
         case extendedEntities = "extended_entities"
         case createdAt = "created_at"
+        case favouriteCount = "favorite_count"
         case idStr = "id_str"
     }
 }

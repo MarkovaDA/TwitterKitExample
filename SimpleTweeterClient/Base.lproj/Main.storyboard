@@ -402,6 +402,7 @@
                                         <connections>
                                             <outlet property="moreButton" destination="wzN-Ln-LLo" id="A4k-nM-nba"/>
                                             <outlet property="tweetDateLabel" destination="5WN-jq-k59" id="mXx-HH-SO1"/>
+                                            <outlet property="tweetFavouriteCount" destination="VVC-g3-uwd" id="Orx-Rv-KE9"/>
                                             <outlet property="tweetTextField" destination="7qL-Cx-wJp" id="qKM-nM-mQj"/>
                                         </connections>
                                     </tableViewCell>
