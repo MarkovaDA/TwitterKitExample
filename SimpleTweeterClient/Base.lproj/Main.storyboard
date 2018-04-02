@@ -372,13 +372,23 @@
                                                     <color key="textColor" red="0.22078424690000001" green="0.63118094209999998" blue="0.95130306480000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wzN-Ln-LLo">
+                                                    <rect key="frame" x="326" y="147" width="48" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" title="more..."/>
+                                                    <connections>
+                                                        <action selector="btnMoreClicked:" destination="Agf-4r-k1X" eventType="touchUpInside" id="UN9-YC-7mk"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="5WN-jq-k59" firstAttribute="top" secondItem="tV9-o6-mVu" secondAttribute="top" constant="20" id="6jh-bg-Ma3"/>
                                                 <constraint firstItem="7qL-Cx-wJp" firstAttribute="leading" secondItem="tV9-o6-mVu" secondAttribute="leading" id="9ys-RA-NCi"/>
                                                 <constraint firstAttribute="trailing" secondItem="5WN-jq-k59" secondAttribute="trailing" constant="15" id="ASP-Ie-xy2"/>
+                                                <constraint firstAttribute="trailing" secondItem="wzN-Ln-LLo" secondAttribute="trailing" id="Eje-OL-Ay9"/>
                                                 <constraint firstAttribute="trailing" secondItem="7qL-Cx-wJp" secondAttribute="trailing" constant="8" id="FiD-TP-Q5V"/>
                                                 <constraint firstItem="VVC-g3-uwd" firstAttribute="top" secondItem="GlE-Ik-B9a" secondAttribute="top" id="KSs-Nn-VBC"/>
+                                                <constraint firstAttribute="bottom" secondItem="wzN-Ln-LLo" secondAttribute="bottom" id="QWM-KH-PCA"/>
                                                 <constraint firstItem="7qL-Cx-wJp" firstAttribute="top" secondItem="VVC-g3-uwd" secondAttribute="bottom" constant="8" symbolic="YES" id="SKl-74-v7q"/>
                                                 <constraint firstAttribute="bottom" secondItem="7qL-Cx-wJp" secondAttribute="bottom" constant="20" id="b1p-bd-Rkh"/>
                                                 <constraint firstItem="VVC-g3-uwd" firstAttribute="leading" secondItem="GlE-Ik-B9a" secondAttribute="trailing" constant="9" id="eh2-pD-6uV"/>
@@ -390,6 +400,7 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
+                                            <outlet property="moreButton" destination="wzN-Ln-LLo" id="A4k-nM-nba"/>
                                             <outlet property="tweetDateLabel" destination="5WN-jq-k59" id="mXx-HH-SO1"/>
                                             <outlet property="tweetTextField" destination="7qL-Cx-wJp" id="qKM-nM-mQj"/>
                                         </connections>

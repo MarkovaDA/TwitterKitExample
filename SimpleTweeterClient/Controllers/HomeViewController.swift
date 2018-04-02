@@ -14,8 +14,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tweetTableView: UITableView!
     
     var activityIndicator = UIActivityIndicatorView()
-    //! использовать разделяемый ресурс твитов - при создании твита добавлять новый твит в список, не перегружая форму
-    var tweets: [Tweet]? = [] //cписок твитов текущего пользователя
+    var selectedTweetIndex: Int = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tweets!.count
+        return TweetList.shared.tweets!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,20 +61,18 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         formatter.dateFormat = "MM/dd/yyyy HH:mm:ss"
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetTableViewCell
-        cell.tweetTextField.text = self.tweets![indexPath.row].fullText
-        cell.tweetDateLabel.text = formatter.string(from: self.tweets![indexPath.row].createdAt)
+        let tweetForCell = TweetList.shared.tweets![indexPath.row]
+        cell.tweetTextField.text = tweetForCell.fullText
+        cell.tweetDateLabel.text = formatter.string(from: tweetForCell.createdAt)
+        cell.moreButton.tag = indexPath.row
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "TweetDetailSegue", sender: self)
-    }
-    
+    //передача данных о выбранном твите
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailView = segue.destination as? DetailViewController
         if (detailView != nil) {
-            let index = self.tweetTableView.indexPathForSelectedRow?.row //номер выбранного твита
-            detailView?.selectedTweet = self.tweets?[index!]
+            detailView?.selectedTweet = TweetList.shared.tweets![selectedTweetIndex]
         }
     }
     
@@ -96,13 +94,20 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.blockApplicationUI()
         TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
             DispatchQueue.main.async {
-                self.tweets = tweets
+                //self.tweets = tweets
+                TweetList.shared.tweets = tweets
                 self.tweetTableView.reloadData()
                 self.unblockApplicationUI()
             }
         }, failure: {(error: Error?) in
             print(error)
         })
+    }
+    
+    
+    @IBAction func btnMoreClicked(_ sender: UIButton) {
+        self.selectedTweetIndex = sender.tag
+        self.performSegue(withIdentifier: "TweetDetailSegue", sender: self)
     }
     
     func blockApplicationUI() {
