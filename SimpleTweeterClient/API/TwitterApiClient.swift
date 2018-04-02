@@ -66,8 +66,9 @@ class TwitterApiClient {
             }
         }
     }
-    
-    func uploadTweet(text: String, success: @escaping (TWTRTweet?) -> (), failure: @escaping (Error?) -> ()) {
+    //загрузить твит
+    func uploadTweet(text: String,
+                     success: @escaping (TWTRTweet?) -> (), failure: @escaping (Error?) -> ()) {
         if let userId = self.getCurrentUserId() {
             let userClient = TWTRAPIClient(userID: userId)
             userClient.sendTweet(withText: text) { (tweet, error) in
@@ -78,7 +79,21 @@ class TwitterApiClient {
                 }
             }
         }
-        
+    }
+    
+    //загрузить твит с изображением
+    func uploadTweetWithImage(text: String, image: UIImage,
+                     success: @escaping (TWTRTweet?) -> (), failure: @escaping (Error?) -> ()) {
+        if let userId = self.getCurrentUserId() {
+            let userClient = TWTRAPIClient(userID: userId)
+            userClient.sendTweet(withText: text, image: image) { (tweet, error) in
+                if error != nil {
+                    failure(error)
+                } else {
+                    success(tweet)
+                }
+            }
+        }
     }
     
     func getProfilePicture() {

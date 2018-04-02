@@ -8,10 +8,11 @@
 
 import UIKit
 
-class CreateTweetViewController: UIViewController {
+class CreateTweetViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var tweetTextField: UITextView!
+    @IBOutlet weak var imagePreview: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,16 +34,37 @@ class CreateTweetViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    @IBAction func onUploadImageBtnClicked(_ sender: UIButton) {
+         let image = UIImagePickerController()
+         image.delegate = self
+         image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+         image.allowsEditing = false
+         self.present(image, animated: true) {
+         
+         }
+    }
     //отправка твита
     @IBAction func onBtnTweetClicked(_ sender: UIButton) {
+        //проверка на nil
         let tweetText = tweetTextField.text
         if tweetText != nil && tweetText != "" {
-            TwitterApiClient.shared.uploadTweet(text: tweetText!, success: { (tweet) in
-                self.showAlertMessage(message: "Success creating tweet!")
-                //alert об успешной отправке
-            }) { (error) in
-                self.showAlertMessage(message: "Error creating tweet :(")
-                //alert c информацией о том, что при отправке твита возникли ошибки
+            if (imagePreview.image != nil) {
+                TwitterApiClient.shared.uploadTweetWithImage(text: tweetText!, image: imagePreview.image!, success: { (tweet) in
+                    self.showAlertMessage(message: "Success creating tweet with image!")
+                    //alert об успешной отправке
+                }) { (error) in
+                    self.showAlertMessage(message: "Error creating tweet :(")
+                    //alert c информацией о том, что при отправке твита возникли ошибки
+                }
+            } else {
+                TwitterApiClient.shared.uploadTweet(text: tweetText!, success: { (tweet) in
+                    self.showAlertMessage(message: "Success creating tweet!")
+                    //alert об успешной отправке
+                }) { (error) in
+                    self.showAlertMessage(message: "Error creating tweet :(")
+                    //alert c информацией о том, что при отправке твита возникли ошибки
+                }
             }
         }
     }
@@ -62,5 +84,12 @@ class CreateTweetViewController: UIViewController {
         }))
     
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            imagePreview.image = image
+        }
+        self.dismiss(animated: true, completion: nil)
     }
 }
