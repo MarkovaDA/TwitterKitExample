@@ -111,6 +111,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.performSegue(withIdentifier: "TweetDetailSegue", sender: self)
     }
     
+    @IBAction func onProfileBarClicked(_ sender: UIBarButtonItem) {
+        let profileInfo = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoPopupViewController")
+            as! InfoPopupViewController
+        self.addChildViewController(profileInfo)
+        profileInfo.view.frame = self.view.frame
+        self.view.addSubview(profileInfo.view)
+        profileInfo.didMove(toParentViewController: self)
+    }
+    
     func blockApplicationUI() {
         UIApplication.shared.beginIgnoringInteractionEvents()
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray

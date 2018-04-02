@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -102,7 +103,7 @@
         <!--Info Popup View Controller-->
         <scene sceneID="Brh-sd-Ahf">
             <objects>
-                <viewController storyboardIdentifier="newTweetPopup" id="eAz-wR-Gvm" customClass="InfoPopupViewController" customModule="SimpleTweeterClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InfoPopupViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eAz-wR-Gvm" customClass="InfoPopupViewController" customModule="SimpleTweeterClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cXv-LW-SXr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -455,12 +456,19 @@
                         <viewLayoutGuide key="safeArea" id="e43-Pt-Ccn"/>
                     </view>
                     <navigationItem key="navigationItem" id="jbG-94-qTx">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="OJq-6F-yLj">
-                            <color key="tintColor" red="0.22078424690000001" green="0.63118094209999998" blue="0.95130306480000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="logoutBtnClick:" destination="Agf-4r-k1X" id="7cv-C8-kx8"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="action" id="OJq-6F-yLj">
+                                <color key="tintColor" red="0.22078424690000001" green="0.63118094209999998" blue="0.95130306480000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="logoutBtnClick:" destination="Agf-4r-k1X" id="7cv-C8-kx8"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Profile" id="hqp-e6-mcO">
+                                <connections>
+                                    <action selector="onProfileBarClicked:" destination="Agf-4r-k1X" id="Dub-nW-28P"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tweetTableView" destination="mbK-PE-xrR" id="Gv9-vd-JEM"/>
