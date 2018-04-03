@@ -10,7 +10,7 @@ import UIKit
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var imageTableView: UITableView!
-    
+    @IBOutlet weak var titleLabelUI: UILabel!
     var selectedTweet: Tweet?
     
     override func viewDidLoad() {
@@ -18,12 +18,15 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //print(TwitterApiClient.shared.getTweetById(id:  (selectedTweet?.idStr)!))
-        /*if let urls:[Tweet.Entity.Media] = self.selectedTweet?.entities?.media {
-            for i in 0..<urls.count {
-                print("\(i): \(urls[i])")
+        if self.selectedTweet?.extendedEntities == nil {
+            DispatchQueue.main.async {
+                self.titleLabelUI.text = "No images..."
             }
-        }*/
+        } else {
+            DispatchQueue.main.async {
+                self.titleLabelUI.text = "Tweet images"
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -66,6 +66,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.tweetDateLabel.text = formatter.string(from: tweetForCell.createdAt)
         cell.tweetFavouriteCount.text = String(tweetForCell.favouriteCount)
         cell.moreButton.tag = indexPath.row
+    
         return cell
     }
     
@@ -84,10 +85,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         createTweet.view.frame = self.view.frame
         self.view.addSubview(createTweet.view)
         createTweet.didMove(toParentViewController: self)
-        /*let createTweetController = self.storyboard?.instantiateViewController(withIdentifier: "CreateTweetController")
-            as! CreateTweetViewController
-        self.present(createTweetController, animated: true, completion: nil)*/
-        //детектировать изменения
     }
     
     

@@ -257,7 +257,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k9u-5b-quP">
-                                <rect key="frame" x="10" y="54" width="394" height="628"/>
+                                <rect key="frame" x="10" y="88" width="394" height="594"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="254" id="5sF-y2-ZT6" customClass="ImageTableViewCell" customModule="SimpleTweeterClient" customModuleProvider="target">
@@ -299,15 +299,24 @@
                                     <action selector="backBtnClicked:" destination="AYu-vL-SvS" eventType="touchUpInside" id="HS3-ul-A3O"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EM7-Bo-O8X">
+                                <rect key="frame" x="20" y="87" width="374" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pEf-IY-Cgc" firstAttribute="top" secondItem="OSm-n8-IaA" secondAttribute="topMargin" constant="-3" id="HI1-5U-5xu"/>
-                            <constraint firstItem="k9u-5b-quP" firstAttribute="top" secondItem="pEf-IY-Cgc" secondAttribute="bottom" constant="7" id="KyM-Hq-STG"/>
+                            <constraint firstItem="k9u-5b-quP" firstAttribute="top" secondItem="pEf-IY-Cgc" secondAttribute="bottom" constant="41" id="KyM-Hq-STG"/>
+                            <constraint firstItem="k9u-5b-quP" firstAttribute="top" secondItem="EM7-Bo-O8X" secondAttribute="bottom" constant="1" id="U9z-6y-ZO9"/>
                             <constraint firstItem="pEf-IY-Cgc" firstAttribute="trailing" secondItem="OSm-n8-IaA" secondAttribute="trailingMargin" id="ZxC-0k-Den"/>
                             <constraint firstItem="Apa-xV-r2b" firstAttribute="bottom" secondItem="k9u-5b-quP" secondAttribute="bottom" constant="10" id="g2s-r2-QWR"/>
+                            <constraint firstItem="EM7-Bo-O8X" firstAttribute="leading" secondItem="Apa-xV-r2b" secondAttribute="leading" constant="20" id="jC8-qg-B4n"/>
                             <constraint firstItem="Apa-xV-r2b" firstAttribute="trailing" secondItem="k9u-5b-quP" secondAttribute="trailing" constant="10" id="lUs-6g-Ihb"/>
                             <constraint firstItem="pEf-IY-Cgc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OSm-n8-IaA" secondAttribute="leadingMargin" id="oLU-R8-OvU"/>
+                            <constraint firstItem="Apa-xV-r2b" firstAttribute="trailing" secondItem="EM7-Bo-O8X" secondAttribute="trailing" constant="20" id="oP0-aB-JKJ"/>
                             <constraint firstItem="k9u-5b-quP" firstAttribute="leading" secondItem="Apa-xV-r2b" secondAttribute="leading" constant="10" id="vcM-r4-jya"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Apa-xV-r2b"/>
@@ -316,11 +325,12 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageTableView" destination="k9u-5b-quP" id="P4B-la-Ec1"/>
+                        <outlet property="titleLabelUI" destination="EM7-Bo-O8X" id="lUP-CH-XPa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpY-1t-dz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29" y="2288"/>
+            <point key="canvasLocation" x="28.985507246376812" y="2287.5"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="wfk-Mj-TbA">
