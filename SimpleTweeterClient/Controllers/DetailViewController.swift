@@ -46,34 +46,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageTableViewCell
         let imageUrl: String = (self.selectedTweet?.extendedEntities?.media![indexPath.row].media_url_https)!
 
-        self.uploadImage(url: imageUrl, success: { (image: UIImage) in
+        TwitterApiClient.shared.uploadImage(url: imageUrl, success: { (image: UIImage) in
             DispatchQueue.main.async {
                 cell.tweetImageView.image = image
             }
         }) { (error: Error) in
-            print("CELL ERROR GETTING IMAGE")
+            
         }
         return cell
     }
-    
-    func uploadImage(/*index: Int,*/url: String, success: @escaping (UIImage) -> (), failure: @escaping (Error) -> ()) {
-        let imageUrl = URL(string: url)
-        let loadImageTask = URLSession.shared.dataTask(with: imageUrl!) {
-            (data, response, error) in
-            if error != nil {
-                failure(error!)
-            }
-            else if data != nil {
-                let image = UIImage(data: data!)
-                success(image!)
-                /*DispatchQueue.main.async {
-                    let cell = self.imageTableView.cellForRow(at: IndexPath(row: index, section: 0)) as!
-                        ImageTableViewCell
-                    cell.tweetImageView.image = image
-                    self.imageTableView.reloadData()
-                }*/
-            }
-        }
-        loadImageTask.resume()
-    }
+
 }

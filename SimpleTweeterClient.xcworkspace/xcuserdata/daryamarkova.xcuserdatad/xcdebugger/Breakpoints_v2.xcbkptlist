@@ -10,13 +10,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SimpleTweeterClient/Controllers/HomeViewController.swift"
-            timestampString = "544447558.3458149"
+            timestampString = "544462406.555235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "75"
             endingLineNumber = "75"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SimpleTweeterClient/API/TwitterApiClient.swift"
+            timestampString = "544462406.555311"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "getCurrentUserProfile(success:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SimpleTweeterClient/Controllers/InfoPopupViewController.swift"
+            timestampString = "544462406.555385"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SimpleTweeterClient.InfoPopupViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "SimpleTweeterClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daryamarkova/XCodeProjects/SimpleTweeterClient/SimpleTweeterClient/Controllers/InfoPopupViewController.swift"
+                  timestampString = "544461868.452135"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "22">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SimpleTweeterClient.User) -&gt; () in SimpleTweeterClient.InfoPopupViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "SimpleTweeterClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daryamarkova/XCodeProjects/SimpleTweeterClient/SimpleTweeterClient/Controllers/InfoPopupViewController.swift"
+                  timestampString = "544461868.459337"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "297">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
