@@ -30,5 +30,4 @@ class WelcomeViewController: UINavigationController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

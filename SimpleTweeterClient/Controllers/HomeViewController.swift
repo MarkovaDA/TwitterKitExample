@@ -12,13 +12,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var tweetTableView: UITableView!
-    
+    //TweetList.shared.tweets - здесь хранятся твиты
     var activityIndicator = UIActivityIndicatorView()
     var selectedTweetIndex: Int = 0
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //TweetStorageService.shared.getTweets()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -28,9 +29,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             DispatchQueue.main.async {
                 self.userNameLabel.text = user?.name
             }
-            self.reloadTweetTable()
+            self.reloadData()
         }) { (error: Error?) in
             print("ERROR GETTING USER")
+            //всплывающий alert о том, что интернет-соединение отсутствует
         }
     }
     
@@ -88,18 +90,22 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    func reloadTweetTable() {
+    func reloadData() {
         self.blockApplicationUI()
-        TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
+        DispatchQueue.main.async {
+            TweetList.shared.tweets = TweetStorageService.shared.getTweets()
+            self.tweetTableView.reloadData()
+            self.unblockApplicationUI()
+        }
+        /*TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
             DispatchQueue.main.async {
-                //self.tweets = tweets
                 TweetList.shared.tweets = tweets
                 self.tweetTableView.reloadData()
                 self.unblockApplicationUI()
             }
         }, failure: {(error: Error?) in
             print(error)
-        })
+        })*/
     }
     
     

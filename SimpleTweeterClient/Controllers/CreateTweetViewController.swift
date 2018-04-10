@@ -71,7 +71,7 @@ class CreateTweetViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func onBtnCancelClicked(_ sender: UIButton) {
         let parent = self.parent as! HomeViewController
-        parent.reloadTweetTable()
+        parent.reloadData()
         self.view.removeFromSuperview()
         //dismiss(animated: true, completion: nil)
     }

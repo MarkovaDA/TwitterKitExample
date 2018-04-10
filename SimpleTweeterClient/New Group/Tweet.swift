@@ -13,16 +13,16 @@ struct Tweet: Codable {
     let idStr: String
     let createdAt: Date //дата публикации
     let fullText: String? //текст
-    let extendedEntities: Entity?
-    let favouriteCount: Int
+    var extendedEntities: Entity?
+    let favouriteCount: Int32
     struct Entity: Codable {
         struct Media: Codable {
             let media_url: String?
             let media_url_https: String?
+            let id: Int64
         }
-        let media: [Media]?
+        var media: [Media]?
     }
-    
     enum CodingKeys:String, CodingKey {
         case id
         case fullText = "full_text"
