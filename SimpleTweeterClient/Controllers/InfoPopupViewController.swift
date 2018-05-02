@@ -24,6 +24,7 @@ class InfoPopupViewController: UIViewController {
     
    
     override func viewDidAppear(_ animated: Bool) {
+        //сначала вытянуть из базы профиль и убедиться, что его нет
         TwitterApiClient.shared.getCurrentUserProfile(success: { (user) in
             TwitterApiClient.shared.uploadImage(url: "https://twitter.com/\(user.screenName)/profile_image?size=original", success: { (image: UIImage) in
                 DispatchQueue.main.async {
@@ -51,6 +52,7 @@ class InfoPopupViewController: UIViewController {
     
     @IBAction func btnCancelClicked(_ sender: UIButton) {
         //self.view.removeFromSuperview()
+        //СОХРАНИТЬ ЮЗЕРА В БД
         self.hideAnimate()
     }
     

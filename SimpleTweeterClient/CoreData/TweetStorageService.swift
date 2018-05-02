@@ -87,4 +87,38 @@ class TweetStorageService {
         let deleteTweetRequest = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "TweetEntity"))
         try! context.execute(deleteTweetRequest)
     }
+    
+    //сохранить пользователя
+    func saveUserInfo(user: User) {
+        let userEntity = NSEntityDescription.entity(forEntityName: "UserEntity", in: context)!
+        let savedUser = UserEntity(entity: userEntity, insertInto: context)
+        savedUser.name = user.name
+        savedUser.screen_name = user.screenName
+        savedUser.followers_count = user.followersCount
+        savedUser.friends_count = user.friendsCount
+        savedUser.created_at = user.createdAt as NSDate
+        try! context.save()
+    }
+    //извлечь информацию о пользователе
+    func getUserInfo(currentUserId: Int64) -> User? {
+        let userFetchRequest: NSFetchRequest<UserEntity> =
+            NSFetchRequest<UserEntity>(entityName: "UserEntity");
+        let users: [UserEntity] = try! context.fetch(userFetchRequest)
+        if (!users.isEmpty) {
+            //возвращаем информацию о текущем зарегистрированном пользователе
+            let fetchedUser  = users.filter({ (user) -> Bool in
+                user.id == currentUserId
+            }).first
+            if fetchedUser != nil {
+                return User(id: 123, idStr: "",
+                            createdAt: fetchedUser?.created_at as! Date,
+                            name: fetchedUser!.name,
+                            screenName: fetchedUser!.screen_name,
+                            location: "",
+                            friendsCount: fetchedUser!.friends_count,
+                            followersCount: fetchedUser!.followers_count)
+            }
+        }
+        return nil
+    }
 }

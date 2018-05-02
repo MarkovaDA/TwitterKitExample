@@ -19,21 +19,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TweetStorageService.shared.getTweets()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.tweetTableView.estimatedRowHeight = 150
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
-        TwitterApiClient.shared.getCurrentUser(success: { (user: TWTRUser?) in
-            DispatchQueue.main.async {
-                self.userNameLabel.text = user?.name
-            }
-            self.reloadData()
-        }) { (error: Error?) in
-            print("ERROR GETTING USER")
-            //всплывающий alert о том, что интернет-соединение отсутствует
-        }
+        self.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,21 +82,42 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     func reloadData() {
-        self.blockApplicationUI()
-        DispatchQueue.main.async {
-            TweetList.shared.tweets = TweetStorageService.shared.getTweets()
-            self.tweetTableView.reloadData()
-            self.unblockApplicationUI()
-        }
-        /*TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
-            DispatchQueue.main.async {
-                TweetList.shared.tweets = tweets
-                self.tweetTableView.reloadData()
-                self.unblockApplicationUI()
+        if Reachability.isConnectedToNetwork() {
+            self.blockApplicationUI()
+            TwitterApiClient.shared.getHomeTimeline(success: {(tweets: [Tweet]?) in
+             DispatchQueue.main.async {
+                 TweetList.shared.tweets = tweets
+                 self.tweetTableView.reloadData()
+                 self.unblockApplicationUI()
+             }
+             }, failure: {(error: Error?) in
+                print(error)
+             })
+        } else {
+            if (TweetList.shared.tweets!.count > 0) {
+                return
             }
-        }, failure: {(error: Error?) in
-            print(error)
-        })*/
+            let alert = UIAlertController(title: "Problem",
+                                          message: "Your device is not connected to Internet. Fetch last tweets from DB?",
+                                          preferredStyle: UIAlertControllerStyle.actionSheet)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+        
+                TweetList.shared.tweets = TweetStorageService.shared.getTweets()
+                
+                alert.dismiss(animated: true, completion:nil)
+                
+                DispatchQueue.main.async {
+                    TweetList.shared.tweets = TweetStorageService.shared.getTweets()
+                    self.tweetTableView.reloadData()
+                    self.unblockApplicationUI()
+                }
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: {(action) in
+                alert.dismiss(animated: true, completion:nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     
